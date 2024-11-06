@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UsuarioRepository;
+use App\Repository\EmpresaRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UsuarioRepository::class)]
-#[ORM\Table(name: "usuarios")]
+#[ORM\Entity(repositoryClass: EmpresaRepository::class)]
+#[ORM\Table(name: "empresas")]
 
-class Usuario implements UserInterface
+class Empresa
 {
     
     #[ORM\Id]
@@ -17,33 +16,11 @@ class Usuario implements UserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    public function getRoles(): array
-    {
-        return $this->admin ? ['ROLE_ADMIN'] : ['ROLE_USER'];
-    }
-
-
-    public function eraseCredentials()
-    {
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->email;
-    }
-
-
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 100)]
     private string $nome;
 
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
-    private string $email;
-
-    #[ORM\Column(type: 'string')]
-    private string $senha;
-
-    #[ORM\Column(type: 'boolean')]
-    private bool $admin;
+    #[ORM\Column(type: 'string', length: 100, unique: true)]
+    private string $cnpj;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $token;
@@ -53,9 +30,6 @@ class Usuario implements UserInterface
 
     #[ORM\Column(type: 'string')]
     private string $deleted;
-
-    #[ORM\Column(type: 'string')]
-    private string $id_empresa;
 
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $created_at;
@@ -80,38 +54,15 @@ class Usuario implements UserInterface
         return $this;
     }
 
-    public function getEmail(): string
-    {
-        return $this->email;
+    public function getCnpj(): string{
+
+        return $this->cnpj;
+
     }
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
+    public function setCnpj(string $cnpj): self{
 
-        return $this;
-    }
-
-    public function getSenha(): string
-    {
-        return $this->senha;
-    }
-
-    public function setSenha(string $senha): self
-    {
-        $this->senha = $senha;
-
-        return $this;
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(bool $admin): self
-    {
-        $this->admin = $admin;
+        $this->cnpj = $cnpj;
 
         return $this;
     }
@@ -125,16 +76,6 @@ class Usuario implements UserInterface
     {
         $this->token = $token;
 
-        return $this;
-    }
-
-    public function getIdEmpresa(): string{
-        return $this->id_empresa;
-    }
-
-    public function setIdEmpresa(string $id_empresa): self{
-        $this->id_empresa = $id_empresa;
-        
         return $this;
     }
 
@@ -186,3 +127,4 @@ class Usuario implements UserInterface
         return $this;
     }
 }
+

@@ -1,1 +1,1 @@
-insert into usuarios (id, nome, email, senha, admin, token, status, deleted, created_at, updated_at) values (1, 'admin', 'admin@admin.com', '123', TRUE, 'dnui124dnijn1nd2134', 1, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+insert into usuarios (id, nome, email, senha, admin, token, status, deleted, created_at, updated_at, id_cliente) values (1, 'admin', 'admin@admin.com', '123', TRUE, 'dnui124dnijn1nd2134', 1, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0)
