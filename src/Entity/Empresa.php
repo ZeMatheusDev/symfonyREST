@@ -6,11 +6,9 @@ use App\Repository\EmpresaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EmpresaRepository::class)]
-#[ORM\Table(name: "empresas")]
-
+#[ORM\Table(name: 'empresas')]
 class Empresa
 {
-    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -54,14 +52,13 @@ class Empresa
         return $this;
     }
 
-    public function getCnpj(): string{
-
+    public function getCnpj(): string
+    {
         return $this->cnpj;
-
     }
 
-    public function setCnpj(string $cnpj): self{
-
+    public function setCnpj(string $cnpj): self
+    {
         $this->cnpj = $cnpj;
 
         return $this;
@@ -127,4 +124,3 @@ class Empresa
         return $this;
     }
 }
-

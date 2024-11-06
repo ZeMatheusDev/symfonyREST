@@ -16,25 +16,6 @@ use function Symfony\Component\Clock\now;
 
 class AccountController extends AbstractController
 {
-    #[Route('/api/login', name: 'login', methods: ['POST'])]
-    public function login(Request $request, EntityManagerInterface $entityManager, JWTTokenManagerInterface $jwtManager): Response
-    {
-        $valoresRequest = json_decode($request->getContent(), true);
-        $email = $valoresRequest['email'] ?? null;
-        $senha = sha1($valoresRequest['senha']) ?? null;
-
-        $verificarLogin = $entityManager->getRepository(Usuario::class)->findOneBy(['email' => $email, 'senha' => $senha, 'deleted' => 0]);
-        
-        if($verificarLogin){
-            $token = $jwtManager->create($verificarLogin);
-            return new JsonResponse(['mensagem' => 'success', 'token' => $token], Response::HTTP_OK);
-        }
-        else{
-            return new JsonResponse(['mensagem' => 'error'], Response::HTTP_OK);
-        }
-
-    }
-
     #[Route('/api/cadastrar/socio', name: 'cadastrarSocio', methods: ['POST'])]
     public function cadastrarSocio(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -66,50 +47,5 @@ class AccountController extends AbstractController
         else{
             return new JsonResponse(['mensagem' => 'error'], Response::HTTP_OK);
         }
-    }
-
-    #[Route('/api/cadastrar/empresa', name: 'cadastrarEmpresa', methods: ['POST'])]
-    public function cadastrarEmpresa(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $valoresRequest = json_decode($request->getContent(), true);
-        $cnpj = $valoresRequest['cnpj'] ?? null;
-        $nome = $valoresRequest['nome'] ?? null;
-
-        $verificarLogin = $entityManager->getRepository(Empresa::class)->findOneBy(['cnpj' => $cnpj, 'deleted' => 0]);
-
-        if(!$verificarLogin){
-            $token = bin2hex(random_bytes(16));
-            $empresa = new Empresa();
-            $empresa->setNome($nome);
-            $empresa->setCnpj($cnpj);
-            $empresa->setToken($token);
-            $empresa->setStatus(1);
-            $empresa->setDeleted(0);
-            $empresa->setCreatedAt(new \DateTime()); 
-            $entityManager->persist($empresa);
-            $entityManager->flush();
-
-            return new JsonResponse(['mensagem' => 'success'], Response::HTTP_OK);
-        }
-        else{
-            return new JsonResponse(['mensagem' => 'error'], Response::HTTP_OK);
-        }
-    }
-
-    #[Route('/api/getEmpresas', name: 'getEmpresas', methods: ['GET'])]
-    public function getEmpresas(EntityManagerInterface $entityManager): Response
-    {
-        $empresas = $entityManager->getRepository(Empresa::class)->findBy(['deleted' => 0]);
-        
-        $empresasEmArray = [];
-
-        foreach($empresas as $empresa){
-            $empresasEmArray[] = [
-                'id' => $empresa->getId(),
-                'nome' => $empresa->getNome(),
-            ];
-        }
-
-        return new JsonResponse(['empresas' => $empresasEmArray], Response::HTTP_OK);
     }
 }
