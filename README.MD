@@ -10,15 +10,11 @@ para rodar o sistema, basta seguir o passo a passo...
 
 4- criando o public.pem, rodar no terminal - openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 
-5- alterar no .env o JWT_PASSPHRASE para a senha que voce criou ao rodar o private.pem, por exemplo -
+5- baixar e instalar o postgresql
 
-JWT_PASSPHRASE=1234
+6- criar 1 banco de dados com o nome que voce queira (informar no .env)
 
-6- baixar e instalar o postgresql
-
-7- criar 1 banco de dados com o nome que voce queira (informar no .env)
-
-8- rodar o seguinte comando sql para criação das tabelas
+7- rodar o seguinte comando sql para criação das tabelas
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -52,22 +48,22 @@ VALUES ('Admin', 'admin@admin.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-9- agora com o banco de dados criado, verifique o .env para ver como esta o acesso ao banco de dados do pgadmin do seu servidor...
+8- agora com o banco de dados criado, verifique o .env para ver como esta o acesso ao banco de dados do pgadmin do seu servidor...
 
 exemplo passando o username, password, ip e porta do banco, e o nome da database...
 
 DATABASE_URL="postgresql://postgres:123@localhost:5433/bd_desafio?serverVersion=13"
 
-10- agora com tudo configurado, voce já tem acesso ao sistema no frontend utilizando a conta admin do servidor que voce fez o insert
+9- agora com tudo configurado, voce já tem acesso ao sistema no frontend utilizando a conta admin do servidor que voce fez o insert
 
 login - admin@admin.com
 senha - 123
 
-11- rode o symfony serve ou php -S localhost:8000 -t public para a porta 8000, caso esteja em uso trocar...
+10- rode o symfony serve ou php -S localhost:8000 -t public para a porta 8000, caso esteja em uso trocar...
 
-12- caso queira ver a documentação das APIs, acessar o localhost:8000/api/doc
+11- caso queira ver a documentação das APIs, acessar o localhost:8000/api/doc
 
-13- va para o frontend e leia o readme, backend pronto pra uso!
+12- va para o frontend e leia o readme, backend pronto pra uso!
 
 
 
