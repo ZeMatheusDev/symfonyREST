@@ -16,6 +16,11 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 class LoginController extends AbstractController
 {
     #[Route('/api/login', name: 'login', methods: ['POST'])]
+     /**
+     * Faz login no sistema.
+     *
+     * Essa API e responsavel por fazer login no sistema, esperando o email e senha para autenticar.
+     */
     public function login(Request $request, EntityManagerInterface $entityManager, JWTTokenManagerInterface $jwtManager): Response
     {
         $valoresRequest = json_decode($request->getContent(), true);

@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: 'Informacoes das APIs do sistema desafio'
+            description: 'Leia atentamente a descricao de cada API'
+            version: 1.0.0
+    areas: 
+        path_patterns:
+            - /api/*
