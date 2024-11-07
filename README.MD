@@ -4,11 +4,21 @@ para rodar o sistema, basta seguir o passo a passo...
 
 1- rodar composer install no terminal
 
-2- baixar e instalar o postgresql
+2- rodar no terminal o comando mkdir -p config/jwt para criação da pasta jwt para configuração do token para o frontend
 
-3- criar 1 banco de dados com o nome que voce queira (informar no .env)
+3- criar os 2 arquivos pem, rodar no terminal - openssl genpkey -algorithm RSA -out config/jwt/private.pem, sem criptografia na senha por ser um sistema desafio
 
-4- rodar o seguinte comando sql para criação das tabelas
+4- criando o public.pem, rodar no terminal - openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+
+5- alterar no .env o JWT_PASSPHRASE para a senha que voce criou ao rodar o private.pem, por exemplo -
+
+JWT_PASSPHRASE=1234
+
+6- baixar e instalar o postgresql
+
+7- criar 1 banco de dados com o nome que voce queira (informar no .env)
+
+8- rodar o seguinte comando sql para criação das tabelas
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -42,22 +52,22 @@ VALUES ('Admin', 'admin@admin.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-5- agora com o banco de dados criado, verifique o .env para ver como esta o acesso ao banco de dados do pgadmin do seu servidor...
+9- agora com o banco de dados criado, verifique o .env para ver como esta o acesso ao banco de dados do pgadmin do seu servidor...
 
 exemplo passando o username, password, ip e porta do banco, e o nome da database...
 
 DATABASE_URL="postgresql://postgres:123@localhost:5433/bd_desafio?serverVersion=13"
 
-6- agora com tudo configurado, voce já tem acesso ao sistema no frontend utilizando a conta admin do servidor que voce fez o insert
+10- agora com tudo configurado, voce já tem acesso ao sistema no frontend utilizando a conta admin do servidor que voce fez o insert
 
 login - admin@admin.com
 senha - 123
 
-7- rode o symfony serve ou php -S localhost:8000 -t public para a porta 8000, caso esteja em uso trocar...
+11- rode o symfony serve ou php -S localhost:8000 -t public para a porta 8000, caso esteja em uso trocar...
 
-8- caso queira ver a documentação das APIs, acessar o localhost:8000/api/doc
+12- caso queira ver a documentação das APIs, acessar o localhost:8000/api/doc
 
-9- va para o frontend e leia o readme, backend pronto pra uso!
+13- va para o frontend e leia o readme, backend pronto pra uso!
 
 
 
